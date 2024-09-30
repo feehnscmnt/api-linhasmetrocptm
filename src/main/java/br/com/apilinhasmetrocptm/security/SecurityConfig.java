@@ -37,32 +37,33 @@ public class SecurityConfig implements Serializable {
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+			.cors().and().csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests(auth -> auth
 			
-			/**
-			 * Endpoints de Administradoras.
-			 */
-			.antMatchers(HttpMethod.POST, "/v1/administradora/cadastrar-administradora/**").hasRole(apiRole)
-			.antMatchers(HttpMethod.GET, "/v1/administradora/listar-administradoras").hasRole(apiRole)
-			.antMatchers(HttpMethod.GET, "/v1/administradora/listar-por-nome/**").hasRole(apiRole)
-			
-			/**
-			 * Endpoints de Linhas.
-			 */
-			.antMatchers(HttpMethod.POST, "/v1/linha/cadastrar-linha/**").hasRole(apiRole)
-			.antMatchers(HttpMethod.GET, "/v1/linha/listar-por-nome/**").hasRole(apiRole)
-			.antMatchers(HttpMethod.GET, "/v1/linha/listar-por-cor/**").hasRole(apiRole)
-			.antMatchers(HttpMethod.GET, "/v1/linha/listar-linhas/**").hasRole(apiRole)
-			
-			/**
-			 * Endpoints de Estações.
-			 */
-			.antMatchers(HttpMethod.POST, "/v1/estacao/cadastrar-estacao/**").hasRole(apiRole)
-			.antMatchers(HttpMethod.GET, "/v1/estacao/listar-estacoes/**").hasRole(apiRole)
-			.antMatchers(HttpMethod.GET, "/v1/estacao/listar-estacao/**").hasRole(apiRole)
-			
-		.anyRequest().authenticated()).httpBasic(withDefaults()).csrf(csrf -> csrf.disable())
-		.exceptionHandling(handling -> handling.authenticationEntryPoint(customAuthEntryPointComponent));
+				/**
+				 * Endpoints de Administradoras.
+				 */
+				.antMatchers(HttpMethod.POST, "/v1/administradora/cadastrar-administradora/**").hasRole(apiRole)
+				.antMatchers(HttpMethod.GET, "/v1/administradora/listar-administradoras").hasRole(apiRole)
+				.antMatchers(HttpMethod.GET, "/v1/administradora/listar-por-nome/**").hasRole(apiRole)
+				
+				/**
+				 * Endpoints de Linhas.
+				 */
+				.antMatchers(HttpMethod.POST, "/v1/linha/cadastrar-linha/**").hasRole(apiRole)
+				.antMatchers(HttpMethod.GET, "/v1/linha/listar-por-nome/**").hasRole(apiRole)
+				.antMatchers(HttpMethod.GET, "/v1/linha/listar-por-cor/**").hasRole(apiRole)
+				.antMatchers(HttpMethod.GET, "/v1/linha/listar-linhas/**").hasRole(apiRole)
+				
+				/**
+				 * Endpoints de Estações.
+				 */
+				.antMatchers(HttpMethod.POST, "/v1/estacao/cadastrar-estacao/**").hasRole(apiRole)
+				.antMatchers(HttpMethod.GET, "/v1/estacao/listar-estacoes/**").hasRole(apiRole)
+				.antMatchers(HttpMethod.GET, "/v1/estacao/listar-estacao/**").hasRole(apiRole)
+				
+			.anyRequest().authenticated()).httpBasic(withDefaults())
+			.exceptionHandling(handling -> handling.authenticationEntryPoint(customAuthEntryPointComponent));
 		
 		return httpSecurity.build();
 	}

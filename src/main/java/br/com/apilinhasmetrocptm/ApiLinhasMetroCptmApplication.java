@@ -17,7 +17,7 @@ import java.io.Serializable;
 @SpringBootApplication
 @EntityScan("br.com.apilinhasmetrocptm.entity")
 @EnableJpaRepositories("br.com.apilinhasmetrocptm.repository")
-@ComponentScan({ "br.com.apilinhasmetrocptm.component", "br.com.apilinhasmetrocptm.controller", "br.com.apilinhasmetrocptm.security" })
+@ComponentScan({ "br.com.apilinhasmetrocptm.config", "br.com.apilinhasmetrocptm.component", "br.com.apilinhasmetrocptm.controller", "br.com.apilinhasmetrocptm.security" })
 public class ApiLinhasMetroCptmApplication implements Serializable {
 	private static final long serialVersionUID = -6140733597744698109L;
 
